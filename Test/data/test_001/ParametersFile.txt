@@ -1,0 +1,24 @@
+//Minimalistic example of t3pa data processing
+
+FileIn_Name = 			"tot_toa.t3pa"	//Name of input file
+FileIn_Path = 			"./Test/data/test_001/Data/" 		//Path of -||-
+
+FileOut_Path = 			"./Test/out/test_001/"	//Path to the 
+
+DirModel = 				"./Test/data/test_012/Models/"
+
+CalMatrices_Path = 		"./Test/data/test_001/CalMat"
+
+FileClusterer_Path = 	"Source/clusterer/out/"
+
+FileLog_Path = 			"./Test/out/test_001/"
+
+TimeSampling = 			0.05 		//seconds
+
+DoExportGraphics=		false
+
+SensThick = 			500	
+SensMat =	 			"Si"
+ChipType = 				"TPX3"	
+
+PIDAlgSwitch = 			102

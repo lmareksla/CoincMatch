@@ -1,0 +1,6 @@
+[submodule "Source/Hist"]
+	path = Source/Hist
+	url = git@github.com:lmareksla/Hist.git
+[submodule "Source/Filter"]
+	path = Source/Filter
+	url = git@github.com:lmareksla/Filter.git
