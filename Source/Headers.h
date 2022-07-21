@@ -1,3 +1,17 @@
+
+#define COINCMATCH_PROG_VER				"1.0.0"
+#define COINCMATCH_DATE_LAST_CHANGE		"18/7/2022"
+
+#define COINCMATCH_ERR_NO_ERROR			0 		//No error occurred.
+#define COINCMATCH_ERR_LOG_FILE_OPEN	-100 	//Can not open log file.
+#define COINCMATCH_ERR_CONFIG_FILE_OPEN	-101 	//Can not open config file.
+#define COINCMATCH_ERR_OPEN_ELIST		-102 	//Can not open elist.
+#define COINCMATCH_ERR_INCOR_ELIST		-103 	//Incorrect elist or different data format.
+#define COINCMATCH_ERR_ELIST_NOT_OPEN	-104 	//Elist is not opened.
+#define COINCMATCH_ERR_ELISTS_DIFF_FORM	-105 	//Different format of elists.
+
+
+
 //MAIN HEADERS
 
 	#include <stdio.h> 
@@ -39,6 +53,8 @@
 	#include "Hist_ProcessFile.h"
 
 	#include "Filter.h"
+
+	#include "ClusterListFormat.h"
 
 
 //ROOT LIBRARIES

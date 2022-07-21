@@ -1,5 +1,6 @@
 #include "Headers.h"
 #include "CoincMatch.h"
+#include "Elist.h"
 
 using namespace std;
 

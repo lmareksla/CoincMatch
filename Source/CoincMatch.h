@@ -1,16 +1,13 @@
 #include "Headers.h"
+#include "Elist.h"
+#include "GF.h"
 
 using namespace std;
 
-#define CoincMatch_PROG_VER				"1.0.0"
 
-#define COINCMATCH_ERR_NO_ERROR			0 		//No error occurred.
-#define COINCMATCH_ERR_LOG_FILE_OPEN	-100 	//Can not open log file.
-#define COINCMATCH_ERR_CONFIG_FILE_OPEN	-101 	//Can not open config file.
+#ifndef FRAMEWORK_CoincMatch
+#define FRAMEWORK_CoincMatch
 
-
-#ifndef CLASS_CoincMatch
-#define CLASS_CoincMatch
 
 class CoincMatch
 {
@@ -25,13 +22,17 @@ class CoincMatch
 
 			~CoincMatch()
 			{
-				Delete_CheckNull(FileLog);
+				if(UseStandalone) Delete_CheckNull(FileLog);
 				Delete_CheckNull(FileConfig);
+
+				for (unsigned int i = 0; i < v_Elists.size(); ++i)
+				{
+					Delete_CheckNull(v_Elists[i]);
+				}
 			}
 
 			//Constructor init called in each conctructor.
 			int ConstructorInit();
-
 
 			//Init fuction.
 			int Init();
@@ -39,28 +40,44 @@ class CoincMatch
 		protected:
 
 			string ProgVer;			//Program version.
+			string DateLastChange;	//Last date of program change..
 
 			bool UseStandalone;		//Control to use CoincMatch as standalone.
 
 	//===================================================================================
-	//INPUT VARIABLES
+	//DATA PROCESSING
 	//===================================================================================
-		
+	
 		protected:
 
-			string FileIn_Path;		//
-			string FileIn_Name;		//
+			std::vector<Elist*> v_Elists;
+			string ElistKeyName;
 
-	//===================================================================================
-	//
-	//===================================================================================
-	
+			int N_Detectors;
+			int N_ClusterToLoadAll;
+			int N_ClusterToLoadElist;	
+			std::vector<int> v_FileElists_Size;
+			int FileElist_SizeMin;
+			int FileElist_SizeMax;
+			std::vector<bool> v_IsMoreData;
+			bool IsMoreData;
 
-	//===================================================================================
-	//
-	//===================================================================================
-	
+			std::vector<std::vector<double> > vv_Clusters;
 
+		public:
+
+			//
+			int ProcessData();
+
+			//
+			int CheckElistFormats();
+
+
+			//
+			int InsertClusterTimeSort(std::vector<double> v_Cluster);
+
+			//
+			int FindCoincMatch();
 
 	//===================================================================================
 	//CONFIG
@@ -78,9 +95,14 @@ class CoincMatch
 			//
 	 		int LoadConfig();
 
+			//Init and scan loaded elist from INI config.
+			//o_Section - section from INI config which includes info about elist.
+			int InitScanElist(Section* o_Section);
+
 	//===================================================================================
 	//EXPORT/OUTPUT
 	//===================================================================================;
+		
 		protected:
 
 			bool DoExport;				//
@@ -111,36 +133,32 @@ class CoincMatch
 
 		public:
 
+			void Print_Help();
+			void Print_Version();
 			void Print_MainTitle();	//
 			void Print_BasicInfo();	//
-
-			//
-			string PrintBool(string VarName, bool VarVal);
 			
 			//
 			void Print();
-
-			//Throw error and print it into cerr.
-			//Error - error code which should be in throw and printed.
-			void Error_ThrowAndCerr(int Error);
-
+	
 	//===================================================================================
 	//SET AND GET FUCTIONS
 	//===================================================================================
 		
 		public:
 
-			void Set_FileIn_Name(string set_FileIn_Name){FileIn_Name = set_FileIn_Name; return;}
-			void Set_FileIn_Path(string set_FileIn_Path){FileIn_Path = set_FileIn_Path; return;}
-
 			void Set_FileOut_Path(string set_FileOut_Path){FileOut_Path = set_FileOut_Path;return;}
 			void Set_FileOut_Name(string set_FileOut_Name){FileOut_Name = set_FileOut_Name; return;}
 
 			void Set_DoPrintOut(bool set_DoPrintOut){DoPrintOut = set_DoPrintOut; return;}
 			void Set_DoLog(bool set_DoLog){DoLog = set_DoLog; return;}
-		
+			void Set_FileLog(fstream* set_FileLog){FileLog = set_FileLog; return;}
+
+			std::vector<Elist* > Get_Elists(){return v_Elists;}
+
+
 	//===================================================================================
-	
 };
+
 
 #endif

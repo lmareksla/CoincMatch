@@ -4,3 +4,6 @@
 [submodule "Source/Filter"]
 	path = Source/Filter
 	url = git@github.com:lmareksla/Filter.git
+[submodule "Source/ClusterProc"]
+	path = Source/ClusterProc
+	url = git@github.com:lmareksla/ClusterProc.git

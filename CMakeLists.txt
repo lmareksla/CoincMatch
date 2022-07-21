@@ -35,6 +35,7 @@ target_include_directories(CoincMatchProc PUBLIC
                           )
 
 add_subdirectory(Source)
+add_subdirectory(Source/ClusterProc/Source)
 add_subdirectory(Source/Hist/Source)
 add_subdirectory(Source/Hist/Source/INI_File/Source)
 add_subdirectory(Source/Hist/Source/INI_File/Source/GenLib/Source)
